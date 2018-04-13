@@ -68,7 +68,7 @@ class Entrant: EntrantProfile {
     var accessAreas: AccessAreas
     var rideAccess: RideAccess
     var address: EntrantInformation?
-    var discount: Discounts
+    var discount: Discounts?
     
     init(accessAreas: AccessAreas, rideAccess: RideAccess) {
         self.accessAreas = accessAreas

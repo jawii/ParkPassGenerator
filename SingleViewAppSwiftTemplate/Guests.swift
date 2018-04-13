@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Guest :Entrant, GuestProfile{
+class Guest: Entrant, GuestProfile{
     
     init(){
         let accessAreas = AccessAreas(amusementAcces: true, kitchenAcces: false, rideControlAccess: false, rideAccess: false, officeAccess: false, maintenanceAccess: false)
@@ -18,23 +18,21 @@ class Guest :Entrant, GuestProfile{
     }
 }
 
-class GuestVIP :Entrant, VIPGuestProfile{
+class GuestVIP: Guest, VIPGuestProfile{
     
     var discounts = Discounts(food: 10, merchandice: 20)
-    
-    init(){
-        let accessAreas = AccessAreas(amusementAcces: true, kitchenAcces: false, rideControlAccess: false, rideAccess: false, officeAccess: false, maintenanceAccess: false)
-        let rideAccess = RideAccess(ride: true, canPassLines: true, rideControlAccess: false)
-        super.init(accessAreas: accessAreas, rideAccess: rideAccess)
+
+    override init(){
+        super.init()
+        self.rideAccess = RideAccess(ride: true, canPassLines: true, rideControlAccess: false)
     }
 }
 
-class GuestFreeChild :Entrant, FreeChildGuestProfile{
+class GuestFreeChild: Entrant, FreeChildGuestProfile{
     
     var dateOfBirth: Date
     
     init(dateOfBirth: Date){
-        
         self.dateOfBirth = dateOfBirth
         
         let accessAreas = AccessAreas(amusementAcces: true, kitchenAcces: false, rideControlAccess: false, rideAccess: false, officeAccess: false, maintenanceAccess: false)
