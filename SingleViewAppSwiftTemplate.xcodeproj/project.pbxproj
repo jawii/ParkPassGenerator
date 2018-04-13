@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		31D920D720806E3D009A6626 /* Roles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D920D620806E3D009A6626 /* Roles.swift */; };
+		315FA5D020814F5A003D0664 /* Guests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315FA5CF20814F5A003D0664 /* Guests.swift */; };
+		31D920D720806E3D009A6626 /* EntrantInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D920D620806E3D009A6626 /* EntrantInfo.swift */; };
 		3A8AADC91DF9B85E00A2B931 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8AADC81DF9B85E00A2B931 /* AppDelegate.swift */; };
 		3A8AADCB1DF9B85E00A2B931 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8AADCA1DF9B85E00A2B931 /* ViewController.swift */; };
 		3A8AADCE1DF9B85E00A2B931 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A8AADCC1DF9B85E00A2B931 /* Main.storyboard */; };
@@ -35,7 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		31D920D620806E3D009A6626 /* Roles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roles.swift; sourceTree = "<group>"; };
+		315FA5CF20814F5A003D0664 /* Guests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guests.swift; sourceTree = "<group>"; };
+		31D920D620806E3D009A6626 /* EntrantInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntrantInfo.swift; sourceTree = "<group>"; };
 		3A8AADC51DF9B85E00A2B931 /* SingleViewAppSwiftTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleViewAppSwiftTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A8AADC81DF9B85E00A2B931 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A8AADCA1DF9B85E00A2B931 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -105,7 +107,8 @@
 				3A8AADCF1DF9B85E00A2B931 /* Assets.xcassets */,
 				3A8AADD11DF9B85E00A2B931 /* LaunchScreen.storyboard */,
 				3A8AADD41DF9B85E00A2B931 /* Info.plist */,
-				31D920D620806E3D009A6626 /* Roles.swift */,
+				31D920D620806E3D009A6626 /* EntrantInfo.swift */,
+				315FA5CF20814F5A003D0664 /* Guests.swift */,
 			);
 			path = SingleViewAppSwiftTemplate;
 			sourceTree = "<group>";
@@ -267,7 +270,8 @@
 			files = (
 				3A8AADCB1DF9B85E00A2B931 /* ViewController.swift in Sources */,
 				3A8AADC91DF9B85E00A2B931 /* AppDelegate.swift in Sources */,
-				31D920D720806E3D009A6626 /* Roles.swift in Sources */,
+				315FA5D020814F5A003D0664 /* Guests.swift in Sources */,
+				31D920D720806E3D009A6626 /* EntrantInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

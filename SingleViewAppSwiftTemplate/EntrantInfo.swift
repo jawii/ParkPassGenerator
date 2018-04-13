@@ -9,7 +9,6 @@
 import Foundation
 
 
-//ENUMERATION -> DropDownList
 struct AccessAreas {
     var amusementAcces: Bool
     var kitchenAcces: Bool
@@ -27,7 +26,9 @@ struct Discounts {
     var food: Double
     var merchandice: Double
 }
-struct Address {
+struct EntrantInformation {
+    let fullName: String?
+    let lastName: String?
     let streetAddress: String?
     let city: String?
     let state: String?
@@ -51,59 +52,28 @@ enum EntrantType {
 protocol EntrantProfile {
     var accessAreas : AccessAreas { get }
     var rideAccess: RideAccess { get }
-    var discounts: Discounts { get set }
 }
 
-protocol GuestProfile :EntrantProfile {
+protocol GuestProfile: EntrantProfile {
     
 }
-
-
-class Entrant {
-    //var entrantType: EntrantType
-    var dateOfBirth: Date?
-    var firstName: String?
-    var lastName: String?
-    var address: Address?
-    //init(){}
+protocol VIPGuestProfile: GuestProfile {
+    var discounts: Discounts { get }
+}
+protocol FreeChildGuestProfile: GuestProfile {
+    var dateOfBirth: Date { get }
 }
 
-class Guest :Entrant, GuestProfile{
+class Entrant: EntrantProfile {
     var accessAreas: AccessAreas
     var rideAccess: RideAccess
-    var discounts: Discounts
+    var address: EntrantInformation?
+    var discount: Discounts
     
-    override init(){
-        accessAreas = AccessAreas(amusementAcces: true, kitchenAcces: false, rideControlAccess: false, rideAccess: false, officeAccess: false, maintenanceAccess: false)
-        rideAccess = RideAccess(ride: true, canPassLines: false, rideControlAccess: false)
-        discounts = Discounts(food: 0, merchandice: 0)
+    init(accessAreas: AccessAreas, rideAccess: RideAccess) {
+        self.accessAreas = accessAreas
+        self.rideAccess = rideAccess
     }
 }
-
-class VIPGuest: Guest {
-    
-}
-
-//testing
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
