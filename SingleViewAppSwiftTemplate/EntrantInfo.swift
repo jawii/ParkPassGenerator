@@ -8,7 +8,7 @@
 
 import Foundation
 
-
+/*
 struct AccessAreas {
     var amusementAcces: Bool
     var kitchenAcces: Bool
@@ -16,14 +16,27 @@ struct AccessAreas {
     var officeAccess: Bool
     var maintenanceAccess: Bool
 }
-struct RideAccess{
-    var ride: Bool
-    var canPassLines: Bool
+*/
+
+enum AccessAreas{
+    case amusement
+    case kitchen
+    case rideControl
+    case office
+    case maintenance
 }
+
+enum RideAccess{
+    case ride
+    case canPassLines
+}
+
 struct Discounts {
     var food: Double
     var merchandice: Double
 }
+
+
 struct EntrantInformation {
     let firstName: String
     let lastName: String
@@ -50,10 +63,9 @@ enum EntrantType {
 
 
 protocol EntrantProfile {
-    var accessAreas : AccessAreas { get }
-    var rideAccess: RideAccess { get }
+    var accessAreas : [AccessAreas] { get }
+    var rideAccess: [RideAccess] { get }
     var entrantInformation: EntrantInformation { get }
-    
 }
 
 protocol GuestProfile: EntrantProfile {
@@ -83,14 +95,23 @@ protocol ManagerProfile: EntrantProfile {
 
 
 class Entrant: EntrantProfile {
-    var accessAreas: AccessAreas
-    var rideAccess: RideAccess
+    var accessAreas: [AccessAreas] = []
+    var rideAccess: [RideAccess] = []
     var entrantInformation: EntrantInformation
     
-    init(accessAreas: AccessAreas, rideAccess: RideAccess, entrantInformation: EntrantInformation){
-        self.accessAreas = accessAreas
-        self.rideAccess = rideAccess
+    init(entrantInformation: EntrantInformation) throws{
         self.entrantInformation = entrantInformation
+    }
+    
+    func swipeAreaAccess(){
+    }
+    
+    func swipeDiscounts(){
+        
+    }
+    
+    func swipeRides(){
+        
     }
 }
 

@@ -12,17 +12,11 @@ class Employee: Entrant {
     
     var discounts = Discounts(food: 15, merchandice: 25)
 
-    init(entrantInformation: EntrantInformation) throws {
-        let accessAreas = AccessAreas(
-            amusementAcces: true,
-            kitchenAcces: false,
-            rideControlAccess: false,
-            officeAccess: false,
-            maintenanceAccess: false)
-        
-        let rideAccess = RideAccess(ride: true, canPassLines: false)
-        
-        super.init(accessAreas: accessAreas, rideAccess: rideAccess, entrantInformation: entrantInformation)
+    override init(entrantInformation: EntrantInformation) throws {
+    
+        try super.init(entrantInformation: entrantInformation)
+        self.accessAreas = []
+        self.rideAccess = [.ride]
         
         if entrantInformation.firstName == "" {
             throw EntrantCheckError.invalidFirstName
@@ -42,12 +36,7 @@ class EmployeeHourlyFoodServices: Employee, EmployeeHourlyProfile {
     
     override init(entrantInformation: EntrantInformation) throws{
         try super.init(entrantInformation: entrantInformation)
-        self.accessAreas = AccessAreas(
-            amusementAcces: true,
-            kitchenAcces: true,
-            rideControlAccess: false,
-            officeAccess: false,
-            maintenanceAccess: false)
+        self.accessAreas = [.amusement, .kitchen]
     }
 }
 
@@ -56,12 +45,7 @@ class EmployeeHourlyRideServices: Employee, EmployeeHourlyProfile {
     
     override init(entrantInformation: EntrantInformation) throws{
         try super.init(entrantInformation: entrantInformation)
-        self.accessAreas = AccessAreas(
-            amusementAcces: true,
-            kitchenAcces: false,
-            rideControlAccess: true,
-            officeAccess: false,
-            maintenanceAccess: false)
+        self.accessAreas = [.amusement, .rideControl]
     }
 }
 
@@ -70,12 +54,7 @@ class EmployeeHourlyMaintenance: Employee, EmployeeHourlyProfile {
     
     override init(entrantInformation: EntrantInformation) throws{
         try super.init(entrantInformation: entrantInformation)
-        self.accessAreas = AccessAreas(
-            amusementAcces: true,
-            kitchenAcces: true,
-            rideControlAccess: true,
-            officeAccess: true,
-            maintenanceAccess: true)
+        self.accessAreas = [.amusement, .kitchen, .rideControl, .maintenance]
     }
 }
 
@@ -85,15 +64,8 @@ class Manager: Employee, ManagerProfile {
     var entrantType = EntrantType.manager
     
     override init(entrantInformation: EntrantInformation) throws{
-
         try super.init(entrantInformation: entrantInformation)
-        self.accessAreas = AccessAreas(
-            amusementAcces: true,
-            kitchenAcces: true,
-            rideControlAccess: true,
-            officeAccess: true,
-            maintenanceAccess: true)
-        self.rideAccess = RideAccess(ride: true, canPassLines: false)
+        self.accessAreas = [.amusement, .kitchen, .office, .rideControl, .maintenance]
         self.discounts = Discounts(food: 25, merchandice: 25)
     }
 }

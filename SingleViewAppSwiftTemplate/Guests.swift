@@ -11,16 +11,10 @@ import Foundation
 class Guest:Entrant, GuestProfile{
     var entrantType = EntrantType.guestClassic
     
-    init(entrantInformation: EntrantInformation) throws{
-        let accessAreas = AccessAreas(
-            amusementAcces: true,
-            kitchenAcces: false,
-            rideControlAccess: false,
-            officeAccess: false,
-            maintenanceAccess: false)
-        let rideAccess = RideAccess(ride: true, canPassLines: false)
-        
-        super.init(accessAreas: accessAreas, rideAccess: rideAccess, entrantInformation: entrantInformation)
+    override init(entrantInformation: EntrantInformation) throws{
+        try super.init(entrantInformation: entrantInformation)
+        self.accessAreas = [.amusement]
+        self.rideAccess = [.canPassLines]
     }
 
 }
@@ -32,7 +26,7 @@ class GuestVIP: Guest, VIPGuestProfile{
     override init(entrantInformation: EntrantInformation) throws{
         try super.init(entrantInformation: entrantInformation)
         entrantType = EntrantType.guestVIP
-        self.rideAccess = RideAccess(ride: true, canPassLines: true)
+        self.rideAccess = [.canPassLines, .ride]
     }
 }
 
