@@ -34,24 +34,25 @@ struct EntrantInformation {
     let dateOfBirth: Date
 }
 
-/*
 enum EntrantType {
     //Guests
-    case classicGuest
-    case VIPGuest
-    case FreeChildGuest
+    case guestClassic
+    case guestVIP
+    case guestFreeChild
     //Hourly Employees
-    case foodServicesEmployee
-    case rideServicesEmployee
-    case maintenanceEmployee
+    case Employee
+    case employeeFoodService
+    case employeeRideService
+    case employeeMaintenance
     //other
     case manager
 }
-*/
+
 
 protocol EntrantProfile {
     var accessAreas : AccessAreas { get }
     var rideAccess: RideAccess { get }
+    var entrantType: EntrantType { get }
 }
 
 protocol GuestProfile: EntrantProfile {

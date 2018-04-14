@@ -9,6 +9,9 @@
 import Foundation
 
 class Guest: GuestProfile{
+    
+    var entrantType = EntrantType.guestClassic
+    
     var accessAreas = AccessAreas(
                                 amusementAcces: true,
                                 kitchenAcces: false,
@@ -25,15 +28,19 @@ class GuestVIP: Guest, VIPGuestProfile{
 
     override init(){
         super.init()
-        self.rideAccess = RideAccess(ride: true, canPassLines: true)
-        
+        entrantType = EntrantType.guestVIP
     }
 }
 
 class GuestFreeChild: Guest, FreeChildGuestProfile{
     var entrantInformation: EntrantInformation
     
-    init(entrantInformation: EntrantInformation){
+
+   init(entrantInformation: EntrantInformation){
         self.entrantInformation = entrantInformation
+        super.init()
+        entrantType = EntrantType.guestFreeChild
     }
 }
+
+

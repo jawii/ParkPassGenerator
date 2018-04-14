@@ -8,8 +8,8 @@
 
 import Foundation
 
-
-class EmployeeHourly: EntrantProfile {
+class EmployeeHourly {
+    
     var accessAreas = AccessAreas(
                                 amusementAcces: true,
                                 kitchenAcces: false,
@@ -18,10 +18,9 @@ class EmployeeHourly: EntrantProfile {
                                 maintenanceAccess: false)
     
     var rideAccess = RideAccess(ride: true, canPassLines: false)
-    
     var discounts = Discounts(food: 15, merchandice: 25)
-    
     var entrantInformation: EntrantInformation
+    
     
     init(entrantInformation: EntrantInformation) {
         self.entrantInformation = entrantInformation
@@ -30,6 +29,8 @@ class EmployeeHourly: EntrantProfile {
 
 
 class EmployeeHourlyFoodServices: EmployeeHourly, EmployeeHourlyProfile {
+    var entrantType = EntrantType.employeeFoodService
+    
     override init(entrantInformation: EntrantInformation) {
         super.init(entrantInformation: entrantInformation)
         self.accessAreas = AccessAreas(
@@ -42,6 +43,8 @@ class EmployeeHourlyFoodServices: EmployeeHourly, EmployeeHourlyProfile {
 }
 
 class EmployeeHourlyRideServices: EmployeeHourly, EmployeeHourlyProfile {
+    var entrantType = EntrantType.employeeRideService
+    
     override init(entrantInformation: EntrantInformation) {
         super.init(entrantInformation: entrantInformation)
         self.accessAreas = AccessAreas(
@@ -54,6 +57,8 @@ class EmployeeHourlyRideServices: EmployeeHourly, EmployeeHourlyProfile {
 }
 
 class EmployeeHourlyMaintenance: EmployeeHourly, EmployeeHourlyProfile {
+    var entrantType = EntrantType.employeeMaintenance
+    
     override init(entrantInformation: EntrantInformation) {
         super.init(entrantInformation: entrantInformation)
         self.accessAreas = AccessAreas(
@@ -68,6 +73,7 @@ class EmployeeHourlyMaintenance: EmployeeHourly, EmployeeHourlyProfile {
 
 ///Manager is like a Employee 
 class Manager: ManagerProfile {
+    var entrantType = EntrantType.manager
     var discounts = Discounts(food: 25, merchandice: 25)
     
     var accessAreas = AccessAreas(
