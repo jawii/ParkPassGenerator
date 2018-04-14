@@ -8,14 +8,15 @@
 
 import Foundation
 
-class Guest: Entrant, GuestProfile{
-    
-    init(){
-        let accessAreas = AccessAreas(amusementAcces: true, kitchenAcces: false, rideControlAccess: false, rideAccess: false, officeAccess: false, maintenanceAccess: false)
-        let rideAccess = RideAccess(ride: true, canPassLines: false, rideControlAccess: false)
-        
-        super.init(accessAreas: accessAreas, rideAccess: rideAccess)
-    }
+class Guest: GuestProfile{
+    var accessAreas = AccessAreas(
+                                amusementAcces: true,
+                                kitchenAcces: false,
+                                rideControlAccess: false,
+                                officeAccess: false,
+                                maintenanceAccess: false)
+    var rideAccess = RideAccess(ride: true, canPassLines: false)
+
 }
 
 class GuestVIP: Guest, VIPGuestProfile{
@@ -24,20 +25,15 @@ class GuestVIP: Guest, VIPGuestProfile{
 
     override init(){
         super.init()
-        self.rideAccess = RideAccess(ride: true, canPassLines: true, rideControlAccess: false)
+        self.rideAccess = RideAccess(ride: true, canPassLines: true)
+        
     }
 }
 
-class GuestFreeChild: Entrant, FreeChildGuestProfile{
+class GuestFreeChild: Guest, FreeChildGuestProfile{
+    var entrantInformation: EntrantInformation
     
-    var dateOfBirth: Date
-    
-    init(dateOfBirth: Date){
-        self.dateOfBirth = dateOfBirth
-        
-        let accessAreas = AccessAreas(amusementAcces: true, kitchenAcces: false, rideControlAccess: false, rideAccess: false, officeAccess: false, maintenanceAccess: false)
-        let rideAccess = RideAccess(ride: true, canPassLines: true, rideControlAccess: false)
-        
-        super.init(accessAreas: accessAreas, rideAccess: rideAccess)
+    init(entrantInformation: EntrantInformation){
+        self.entrantInformation = entrantInformation
     }
 }

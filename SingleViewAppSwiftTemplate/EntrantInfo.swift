@@ -13,14 +13,12 @@ struct AccessAreas {
     var amusementAcces: Bool
     var kitchenAcces: Bool
     var rideControlAccess: Bool
-    var rideAccess: Bool
     var officeAccess: Bool
     var maintenanceAccess: Bool
 }
 struct RideAccess{
     var ride: Bool
     var canPassLines: Bool
-    var rideControlAccess: Bool
 }
 struct Discounts {
     var food: Double
@@ -33,7 +31,9 @@ struct EntrantInformation {
     let city: String?
     let state: String?
     let zipCode: String?
+    let dateOfBirth: Date
 }
+
 /*
 enum EntrantType {
     //Guests
@@ -61,13 +61,29 @@ protocol VIPGuestProfile: GuestProfile {
     var discounts: Discounts { get }
 }
 protocol FreeChildGuestProfile: GuestProfile {
-    var dateOfBirth: Date { get }
+    var entrantInformation: EntrantInformation { get }
 }
 
+
+protocol EmployeeProfile: EntrantProfile {
+    var entrantInformation: EntrantInformation { get }
+    var discounts: Discounts { get }
+}
+
+protocol EmployeeHourlyProfile: EmployeeProfile {
+}
+
+protocol ManagerProfile: EntrantProfile {
+    var discounts: Discounts { get }
+    var entrantInformation: EntrantInformation { get }
+}
+
+
+/*
 class Entrant: EntrantProfile {
     var accessAreas: AccessAreas
     var rideAccess: RideAccess
-    var address: EntrantInformation?
+    var entrantInformation: EntrantInformation?
     var discount: Discounts?
     
     init(accessAreas: AccessAreas, rideAccess: RideAccess) {
@@ -75,5 +91,5 @@ class Entrant: EntrantProfile {
         self.rideAccess = rideAccess
     }
 }
-
+*/
 
