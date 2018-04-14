@@ -22,8 +22,18 @@ class EmployeeHourly {
     var entrantInformation: EntrantInformation
     
     
-    init(entrantInformation: EntrantInformation) {
+    init(entrantInformation: EntrantInformation) throws {
         self.entrantInformation = entrantInformation
+        
+        if entrantInformation.fullName == "" {
+            throw EntrantCheckError.invalidFirstName
+        } else if entrantInformation.lastName == "" {
+            throw EntrantCheckError.invalidLastName
+        } else if entrantInformation.state == "" {
+            throw EntrantCheckError.invalidState
+        } else if entrantInformation.zipCode == "" {
+            throw EntrantCheckError.invalidZipCode
+        }
     }
 }
 
@@ -31,8 +41,8 @@ class EmployeeHourly {
 class EmployeeHourlyFoodServices: EmployeeHourly, EmployeeHourlyProfile {
     var entrantType = EntrantType.employeeFoodService
     
-    override init(entrantInformation: EntrantInformation) {
-        super.init(entrantInformation: entrantInformation)
+    override init(entrantInformation: EntrantInformation) throws{
+        try super.init(entrantInformation: entrantInformation)
         self.accessAreas = AccessAreas(
             amusementAcces: true,
             kitchenAcces: true,
@@ -45,8 +55,8 @@ class EmployeeHourlyFoodServices: EmployeeHourly, EmployeeHourlyProfile {
 class EmployeeHourlyRideServices: EmployeeHourly, EmployeeHourlyProfile {
     var entrantType = EntrantType.employeeRideService
     
-    override init(entrantInformation: EntrantInformation) {
-        super.init(entrantInformation: entrantInformation)
+    override init(entrantInformation: EntrantInformation) throws{
+        try super.init(entrantInformation: entrantInformation)
         self.accessAreas = AccessAreas(
             amusementAcces: true,
             kitchenAcces: false,
@@ -59,8 +69,8 @@ class EmployeeHourlyRideServices: EmployeeHourly, EmployeeHourlyProfile {
 class EmployeeHourlyMaintenance: EmployeeHourly, EmployeeHourlyProfile {
     var entrantType = EntrantType.employeeMaintenance
     
-    override init(entrantInformation: EntrantInformation) {
-        super.init(entrantInformation: entrantInformation)
+    override init(entrantInformation: EntrantInformation) throws{
+        try super.init(entrantInformation: entrantInformation)
         self.accessAreas = AccessAreas(
             amusementAcces: true,
             kitchenAcces: true,

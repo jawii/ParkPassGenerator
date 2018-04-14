@@ -25,12 +25,12 @@ struct Discounts {
     var merchandice: Double
 }
 struct EntrantInformation {
-    let fullName: String?
-    let lastName: String?
-    let streetAddress: String?
-    let city: String?
-    let state: String?
-    let zipCode: String?
+    let fullName: String
+    let lastName: String
+    let streetAddress: String
+    let city: String
+    let state: String
+    let zipCode: String
     let dateOfBirth: Date
 }
 
@@ -52,45 +52,44 @@ enum EntrantType {
 protocol EntrantProfile {
     var accessAreas : AccessAreas { get }
     var rideAccess: RideAccess { get }
-    var entrantType: EntrantType { get }
+    
+    
 }
 
 protocol GuestProfile: EntrantProfile {
-    
+    var entrantInformation: EntrantInformation { get }
+    var entrantType: EntrantType { get }
 }
 protocol VIPGuestProfile: GuestProfile {
     var discounts: Discounts { get }
 }
 protocol FreeChildGuestProfile: GuestProfile {
-    var entrantInformation: EntrantInformation { get }
+    
 }
-
-
 protocol EmployeeProfile: EntrantProfile {
+    var entrantType: EntrantType { get }
     var entrantInformation: EntrantInformation { get }
     var discounts: Discounts { get }
 }
-
 protocol EmployeeHourlyProfile: EmployeeProfile {
 }
-
 protocol ManagerProfile: EntrantProfile {
+    var entrantType: EntrantType { get }
     var discounts: Discounts { get }
     var entrantInformation: EntrantInformation { get }
 }
 
 
-/*
+
 class Entrant: EntrantProfile {
     var accessAreas: AccessAreas
     var rideAccess: RideAccess
-    var entrantInformation: EntrantInformation?
-    var discount: Discounts?
+    var entrantInformation: EntrantInformation
     
-    init(accessAreas: AccessAreas, rideAccess: RideAccess) {
+    init(accessAreas: AccessAreas, rideAccess: RideAccess, entrantInformation: EntrantInformation){
         self.accessAreas = accessAreas
         self.rideAccess = rideAccess
+        self.entrantInformation = entrantInformation
     }
 }
-*/
 
