@@ -8,20 +8,19 @@
 
 import Foundation
 
-class Guest: GuestProfile{
-    var entrantInformation: EntrantInformation
+class Guest:Entrant, GuestProfile{
     var entrantType = EntrantType.guestClassic
     
-    var accessAreas = AccessAreas(
-                                amusementAcces: true,
-                                kitchenAcces: false,
-                                rideControlAccess: false,
-                                officeAccess: false,
-                                maintenanceAccess: false)
-    var rideAccess = RideAccess(ride: true, canPassLines: false)
-    
-    init(entrantInformation: EntrantInformation) {
-        self.entrantInformation = entrantInformation
+    init(entrantInformation: EntrantInformation) throws{
+        let accessAreas = AccessAreas(
+            amusementAcces: true,
+            kitchenAcces: false,
+            rideControlAccess: false,
+            officeAccess: false,
+            maintenanceAccess: false)
+        let rideAccess = RideAccess(ride: true, canPassLines: false)
+        
+        super.init(accessAreas: accessAreas, rideAccess: rideAccess, entrantInformation: entrantInformation)
     }
 
 }
@@ -30,31 +29,34 @@ class GuestVIP: Guest, VIPGuestProfile{
     
     var discounts = Discounts(food: 10, merchandice: 20)
 
-    override init(entrantInformation: EntrantInformation){
-        super.init(entrantInformation: entrantInformation)
+    override init(entrantInformation: EntrantInformation) throws{
+        try super.init(entrantInformation: entrantInformation)
         entrantType = EntrantType.guestVIP
+        self.rideAccess = RideAccess(ride: true, canPassLines: true)
     }
 }
 
 class GuestFreeChild: Guest, FreeChildGuestProfile{
     
-    override init(entrantInformation: EntrantInformation){
-        super.init(entrantInformation: entrantInformation)
+    override init(entrantInformation: EntrantInformation) throws{
+        try super.init(entrantInformation: entrantInformation)
         entrantType = EntrantType.guestFreeChild
     
-        //check that age is under
+        //check that age is under 5
         do {
-            try calculateAge(birthday: entrantInformation.dateOfBirth)
-        } catch {}
+            try checkcAgeIsOverFice(with: entrantInformation.dateOfBirth)
+        } catch {
+            print(error)
+        }
     }
     
-    func calculateAge(birthday: Date) throws {
+    func checkcAgeIsOverFice(with birthday: Date) throws {
         
         let timeNow = Date()
         let calendar = Calendar.current
         var age = calendar.dateComponents([.year], from: birthday, to: timeNow)
         
-        print("Child Age is \(age.year!).")
+       //print("Child Age is \(age.year!).")
         
         if age.year! > 5 {
             throw EntrantCheckError.ageTooHigh

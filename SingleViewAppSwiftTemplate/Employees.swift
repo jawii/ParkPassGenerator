@@ -8,24 +8,23 @@
 
 import Foundation
 
-class EmployeeHourly {
+class Employee: Entrant {
     
-    var accessAreas = AccessAreas(
-                                amusementAcces: true,
-                                kitchenAcces: false,
-                                rideControlAccess: false,
-                                officeAccess: false,
-                                maintenanceAccess: false)
-    
-    var rideAccess = RideAccess(ride: true, canPassLines: false)
     var discounts = Discounts(food: 15, merchandice: 25)
-    var entrantInformation: EntrantInformation
-    
-    
+
     init(entrantInformation: EntrantInformation) throws {
-        self.entrantInformation = entrantInformation
+        let accessAreas = AccessAreas(
+            amusementAcces: true,
+            kitchenAcces: false,
+            rideControlAccess: false,
+            officeAccess: false,
+            maintenanceAccess: false)
         
-        if entrantInformation.fullName == "" {
+        let rideAccess = RideAccess(ride: true, canPassLines: false)
+        
+        super.init(accessAreas: accessAreas, rideAccess: rideAccess, entrantInformation: entrantInformation)
+        
+        if entrantInformation.firstName == "" {
             throw EntrantCheckError.invalidFirstName
         } else if entrantInformation.lastName == "" {
             throw EntrantCheckError.invalidLastName
@@ -38,7 +37,7 @@ class EmployeeHourly {
 }
 
 
-class EmployeeHourlyFoodServices: EmployeeHourly, EmployeeHourlyProfile {
+class EmployeeHourlyFoodServices: Employee, EmployeeHourlyProfile {
     var entrantType = EntrantType.employeeFoodService
     
     override init(entrantInformation: EntrantInformation) throws{
@@ -52,7 +51,7 @@ class EmployeeHourlyFoodServices: EmployeeHourly, EmployeeHourlyProfile {
     }
 }
 
-class EmployeeHourlyRideServices: EmployeeHourly, EmployeeHourlyProfile {
+class EmployeeHourlyRideServices: Employee, EmployeeHourlyProfile {
     var entrantType = EntrantType.employeeRideService
     
     override init(entrantInformation: EntrantInformation) throws{
@@ -66,7 +65,7 @@ class EmployeeHourlyRideServices: EmployeeHourly, EmployeeHourlyProfile {
     }
 }
 
-class EmployeeHourlyMaintenance: EmployeeHourly, EmployeeHourlyProfile {
+class EmployeeHourlyMaintenance: Employee, EmployeeHourlyProfile {
     var entrantType = EntrantType.employeeMaintenance
     
     override init(entrantInformation: EntrantInformation) throws{
@@ -82,23 +81,20 @@ class EmployeeHourlyMaintenance: EmployeeHourly, EmployeeHourlyProfile {
 
 
 ///Manager is like a Employee 
-class Manager: ManagerProfile {
+class Manager: Employee, ManagerProfile {
     var entrantType = EntrantType.manager
-    var discounts = Discounts(food: 25, merchandice: 25)
     
-    var accessAreas = AccessAreas(
-        amusementAcces: true,
-        kitchenAcces: true,
-        rideControlAccess: true,
-        officeAccess: true,
-        maintenanceAccess: true)
-    
-    var rideAccess = RideAccess(ride: true, canPassLines: false)
-    
-    var entrantInformation: EntrantInformation
-    
-    init(entrantInformation: EntrantInformation) {
-        self.entrantInformation = entrantInformation
+    override init(entrantInformation: EntrantInformation) throws{
+
+        try super.init(entrantInformation: entrantInformation)
+        self.accessAreas = AccessAreas(
+            amusementAcces: true,
+            kitchenAcces: true,
+            rideControlAccess: true,
+            officeAccess: true,
+            maintenanceAccess: true)
+        self.rideAccess = RideAccess(ride: true, canPassLines: false)
+        self.discounts = Discounts(food: 25, merchandice: 25)
     }
 }
 

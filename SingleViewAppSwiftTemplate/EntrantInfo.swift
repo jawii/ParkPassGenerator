@@ -25,7 +25,7 @@ struct Discounts {
     var merchandice: Double
 }
 struct EntrantInformation {
-    let fullName: String
+    let firstName: String
     let lastName: String
     let streetAddress: String
     let city: String
@@ -52,12 +52,11 @@ enum EntrantType {
 protocol EntrantProfile {
     var accessAreas : AccessAreas { get }
     var rideAccess: RideAccess { get }
-    
+    var entrantInformation: EntrantInformation { get }
     
 }
 
 protocol GuestProfile: EntrantProfile {
-    var entrantInformation: EntrantInformation { get }
     var entrantType: EntrantType { get }
 }
 protocol VIPGuestProfile: GuestProfile {
@@ -67,12 +66,14 @@ protocol FreeChildGuestProfile: GuestProfile {
     
 }
 protocol EmployeeProfile: EntrantProfile {
+    
+}
+protocol EmployeeHourlyProfile: EmployeeProfile{
     var entrantType: EntrantType { get }
     var entrantInformation: EntrantInformation { get }
     var discounts: Discounts { get }
 }
-protocol EmployeeHourlyProfile: EmployeeProfile {
-}
+
 protocol ManagerProfile: EntrantProfile {
     var entrantType: EntrantType { get }
     var discounts: Discounts { get }
