@@ -10,24 +10,27 @@ import Foundation
 
 class Employee: Entrant {
 
-    override init(entrantInformation: EntrantInformation) throws {
+    override init?(entrantInformation: EntrantInformation) throws {
     
-        try super.init(entrantInformation: entrantInformation)
-        //self.accessAreas = []
+       try super.init(entrantInformation: entrantInformation)
+        do {
+            if entrantInformation.firstName == "" {
+                throw EntrantCheckError.invalidFirstName
+            } else if entrantInformation.lastName == "" {
+                throw EntrantCheckError.invalidLastName
+            } else if entrantInformation.state == "" {
+                throw EntrantCheckError.invalidState
+            } else if entrantInformation.zipCode == "" {
+                throw EntrantCheckError.invalidZipCode
+            } else if entrantInformation.city == "" {
+                throw EntrantCheckError.invalidCity
+            }
+        } catch let error as EntrantCheckError {
+            print(error.rawValue)
+            return nil
+        }
         self.rideAccess = [.ride]
         self.discounts = [.food(15), .merchandice(25)]
-        
-        if entrantInformation.firstName == "" {
-            throw EntrantCheckError.invalidFirstName
-        } else if entrantInformation.lastName == "" {
-            throw EntrantCheckError.invalidLastName
-        } else if entrantInformation.state == "" {
-            throw EntrantCheckError.invalidState
-        } else if entrantInformation.zipCode == "" {
-            throw EntrantCheckError.invalidZipCode
-        } else if entrantInformation.city == "" {
-            throw EntrantCheckError.invalidCity
-        }
     }
 }
 
@@ -35,7 +38,7 @@ class Employee: Entrant {
 class EmployeeHourlyFoodServices: Employee, EmployeeHourlyProfile {
     var entrantType = EntrantType.employeeFoodService
     
-    override init(entrantInformation: EntrantInformation) throws{
+    override init?(entrantInformation: EntrantInformation) throws{
         try super.init(entrantInformation: entrantInformation)
         self.accessAreas = [.amusement, .kitchen]
     }
@@ -44,7 +47,7 @@ class EmployeeHourlyFoodServices: Employee, EmployeeHourlyProfile {
 class EmployeeHourlyRideServices: Employee, EmployeeHourlyProfile {
     var entrantType = EntrantType.employeeRideService
     
-    override init(entrantInformation: EntrantInformation) throws{
+    override init?(entrantInformation: EntrantInformation) throws{
         try super.init(entrantInformation: entrantInformation)
         self.accessAreas = [.amusement, .rideControl]
     }
@@ -53,7 +56,7 @@ class EmployeeHourlyRideServices: Employee, EmployeeHourlyProfile {
 class EmployeeHourlyMaintenance: Employee, EmployeeHourlyProfile {
     var entrantType = EntrantType.employeeMaintenance
     
-    override init(entrantInformation: EntrantInformation) throws{
+    override init?(entrantInformation: EntrantInformation) throws{
         try super.init(entrantInformation: entrantInformation)
         self.accessAreas = [.amusement, .kitchen, .rideControl, .maintenance]
     }
@@ -64,7 +67,7 @@ class EmployeeHourlyMaintenance: Employee, EmployeeHourlyProfile {
 class Manager: Employee, ManagerProfile {
     var entrantType = EntrantType.manager
     
-    override init(entrantInformation: EntrantInformation) throws{
+    override init?(entrantInformation: EntrantInformation) throws{
         try super.init(entrantInformation: entrantInformation)
         self.accessAreas = [.amusement, .kitchen, .office, .rideControl, .maintenance]
         self.discounts = [.food(25), .merchandice(25)]

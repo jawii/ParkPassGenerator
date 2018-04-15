@@ -16,29 +16,75 @@ class ViewController: UIViewController {
         
         //age under 5
         var dateComponents = DateComponents()
-        dateComponents.year = 2016
+        dateComponents.year = 2017
         dateComponents.month = 07
         dateComponents.day = 22
         let calendar = Calendar.current
         let date18yearOld = calendar.date(from: dateComponents)
         
-        let testinfo = EntrantInformation(firstName: "a", lastName: "Kenttä", streetAddress: "Ok", city: "", state: "132", zipCode: "123", dateOfBirth: date18yearOld!)
+        let testinfo = EntrantInformation(firstName: "Jaakko", lastName: "Hello", streetAddress: "Ok", city: "Oulu", state: "132", zipCode: "123", dateOfBirth: date18yearOld!)
         
-        do {
-            let entrant = try EmployeeHourlyMaintenance(entrantInformation: testinfo)
-            print(entrant.entrantInformation.firstName)
-            print(entrant.swipeAreaAccess(area: .amusement))
-            print(entrant.swipeDiscounts())
+        //Try to wrap the entrant. If succees, print the information
+        if let entrant = try! EmployeeHourlyRideServices(entrantInformation: testinfo) {
+            print("ENTRANT TYPE: \(entrant.entrantType.rawValue)")
+            print("--------------------------------")
+            testAccessAreas(entrant: entrant)
+            print("--------------------------------")
+            testAccessForRides(entrant: entrant)
+            print("--------------------------------")
+            entrant.swipeDiscounts()
         }
-        catch {
-            print(error)
-        }
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func testAccessAreas(entrant: Entrant){
+        //Print Access for Amusement
+        var listOfGranted: [AccessAreas] = []
+        var listOfDenied: [AccessAreas] = []
+        
+        
+        //List of all areas. Magic added those by hand but this is only for the test case for Part1
+        let areas : [AccessAreas] = [.amusement, .kitchen, .maintenance, .office, .rideControl]
+        for area in areas {
+            entrant.swipeAreaAccess(area: area) ? listOfGranted.append(area) : listOfDenied.append(area)
+        }
+        var grantedAccessStr = "Access Granted for: |"
+        for area in listOfGranted {
+            grantedAccessStr += area.rawValue + "|"
+        }
+        print(grantedAccessStr)
+        var deniedAccessStr = "Acced denied for: |"
+        for area in listOfDenied {
+            deniedAccessStr += area.rawValue + "|"
+        }
+        print(deniedAccessStr)
+    }
+    
+    func testAccessForRides(entrant: Entrant) {
+        var canRideStr = "Entrant can ride: "
+        if entrant.swipeCheck(accessFor: .ride) {
+            canRideStr += "Yes"
+        } else {
+            canRideStr += "No"
+        }
+        print(canRideStr)
+        
+        var canPassLinesStr = "Entrant can pass lines: "
+        if entrant.swipeCheck(accessFor: .canPassLines) {
+            canPassLinesStr += "Yes"
+        } else {
+            canPassLinesStr += "No"
+        }
+        print(canPassLinesStr)
+    }
+    
+    
+    
 
 
 }

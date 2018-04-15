@@ -46,18 +46,18 @@ struct EntrantInformation {
     let dateOfBirth: Date
 }
 
-enum EntrantType {
+enum EntrantType: String {
     //Guests
-    case guestClassic
-    case guestVIP
-    case guestFreeChild
+    case guestClassic = "Guest - Classic"
+    case guestVIP = "Guest - VIP"
+    case guestFreeChild = "Guest - Free Child"
     //Hourly Employees
     case Employee
-    case employeeFoodService
-    case employeeRideService
-    case employeeMaintenance
+    case employeeFoodService = "Employeee Food Services"
+    case employeeRideService = "Employeee Ride Services"
+    case employeeMaintenance = "Employee Maintenance"
     //other
-    case manager
+    case manager = "Manager"
 }
 
 
@@ -85,14 +85,14 @@ protocol ManagerProfile: EntrantProfile {
 }
 
 
-
+///Parent Class for all Entrants
 class Entrant: EntrantProfile {
     var accessAreas: [AccessAreas] = []
     var rideAccess: [RideAccess] = []
     var discounts: [Discounts] = []
     var entrantInformation: EntrantInformation
     
-    init(entrantInformation: EntrantInformation) throws{
+    init?(entrantInformation: EntrantInformation) throws{
         self.entrantInformation = entrantInformation
     }
     
@@ -100,16 +100,28 @@ class Entrant: EntrantProfile {
         //check if area is in accessAreas
         for ownArea in accessAreas {
             if ownArea == area {
-                print("Access Granted to \(area.rawValue)")
+                //print("Access Granted to \(area.rawValue)")
                 return true
             }
         }
-        print("Access denied to \(area.rawValue)")
+        //print("Access denied to \(area.rawValue)")
+        return false
+    }
+    
+    //Swipecheck for rideaccess.
+    func swipeCheck(accessFor: RideAccess) -> Bool{
+        for access in rideAccess {
+            if access == accessFor {
+                //print("Access granted: \(access)")
+                return true
+            }
+        }
+        //print("Access denied: \(access)")
         return false
     }
     
     func swipeDiscounts(){
-        for discount in discounts {
+        for discount in discounts{
             switch discount {
             case .food(let value):
                 print("Food discount \(value)%. ")
@@ -118,17 +130,12 @@ class Entrant: EntrantProfile {
                 print("Merchandice discount \(value)%")
             }
         }
+        
+        if(discounts.isEmpty) {
+            print("No discounts")
+        }
     }
     
-    func swipeCheck(accessFor: RideAccess) -> Bool{
-        for access in rideAccess {
-            if access == accessFor {
-                print("Access granted: \(access)")
-                return true
-            }
-        }
-        print("Access denied: \(rideAccess)")
-        return false
-    }
+    
 }
 

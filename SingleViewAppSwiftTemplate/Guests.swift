@@ -11,7 +11,7 @@ import Foundation
 class Guest:Entrant, GuestProfile{
     var entrantType = EntrantType.guestClassic
     
-    override init(entrantInformation: EntrantInformation) throws{
+    override init?(entrantInformation: EntrantInformation) throws{
         try super.init(entrantInformation: entrantInformation)
         self.accessAreas = [.amusement]
         self.rideAccess = [.canPassLines]
@@ -21,7 +21,7 @@ class Guest:Entrant, GuestProfile{
 
 class GuestVIP: Guest, VIPGuestProfile{
     
-    override init(entrantInformation: EntrantInformation) throws{
+    override init?(entrantInformation: EntrantInformation) throws{
         try super.init(entrantInformation: entrantInformation)
         entrantType = EntrantType.guestVIP
         self.rideAccess = [.canPassLines, .ride]
@@ -31,15 +31,16 @@ class GuestVIP: Guest, VIPGuestProfile{
 
 class GuestFreeChild: Guest, FreeChildGuestProfile{
     
-    override init(entrantInformation: EntrantInformation) throws{
+    override init?(entrantInformation: EntrantInformation) throws{
         try super.init(entrantInformation: entrantInformation)
         entrantType = EntrantType.guestFreeChild
     
         //check that age is under 5
         do {
             try checkcAgeIsOverFice(with: entrantInformation.dateOfBirth)
-        } catch {
-            print(error)
+        } catch let error as EntrantCheckError{
+            print(error.rawValue)
+            return nil
         }
     }
     
@@ -50,7 +51,6 @@ class GuestFreeChild: Guest, FreeChildGuestProfile{
         var age = calendar.dateComponents([.year], from: birthday, to: timeNow)
         
        //print("Child Age is \(age.year!).")
-        
         if age.year! > 5 {
             throw EntrantCheckError.ageTooHigh
         }
