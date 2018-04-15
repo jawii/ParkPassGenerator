@@ -13,13 +13,24 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //Try to wrap the entrant. If succees, print the information
+        //TESTENTRANT comes from file TestCasesForPart_1.swift
         if let entrant = TESTENTRANT {
-            print("ENTRANT TYPE: \(entrant.entrantType.rawValue)")
-            print("--------------------------------")
-            testAccessAreas(entrant: entrant)
-            print("--------------------------------")
-            testAccessForRides(entrant: entrant)
-            print("--------------------------------")
+            
+            print(entrant.entrantType.rawValue)
+            print("********************")
+            print("Swipe for Amusement")
+            print(entrant.swipeAreaAccess(area: .amusement))
+            print("********************")
+            
+            print("Swipe for office")
+            print(entrant.swipeAreaAccess(area: .office))
+            print("********************")
+            
+            print("Swipe for skipping lines")
+            print(entrant.swipeCheck(accessFor: .canPassLines))
+            print("********************")
+            
+            print("DISCOUNTS")
             entrant.swipeDiscounts()
         }
     }
@@ -29,6 +40,8 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    /*
+    //Gives pretty string about entrants AccessAreas
     func testAccessAreas(entrant: Entrant){
         //Print Access for Amusement
         var listOfGranted: [AccessAreas] = []
@@ -50,7 +63,7 @@ class ViewController: UIViewController {
         }
         print(deniedAccessStr)
     }
-    
+    //Pretty String about entrant ride accesses
     func testAccessForRides(entrant: Entrant) {
         var canRideStr = "Entrant can ride: "
         if entrant.swipeCheck(accessFor: .ride) {
@@ -68,5 +81,6 @@ class ViewController: UIViewController {
         }
         print(canPassLinesStr)
     }
+    */
 }
 

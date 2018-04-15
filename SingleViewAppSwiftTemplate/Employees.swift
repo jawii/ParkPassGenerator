@@ -26,6 +26,7 @@ class Employee: Entrant {
                 throw EntrantCheckError.invalidCity
             }
         } catch let error as EntrantCheckError {
+            print("Error for creating pass for Employee:")
             print(error.rawValue)
             return nil
         }

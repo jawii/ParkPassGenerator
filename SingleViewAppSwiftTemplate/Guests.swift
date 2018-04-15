@@ -33,23 +33,22 @@ class GuestFreeChild: Guest, FreeChildGuestProfile{
     
     override init?(entrantInformation: EntrantInformation) throws{
         try super.init(entrantInformation: entrantInformation)
+        entrantType = EntrantType.guestFreeChild
         
-        
-        //check if age is given
+        /*
         guard let age = entrantInformation.dateOfBirth else {
             print(EntrantCheckError.invalidAge.rawValue)
             return nil
         }
+        */
         
-        //now age is date so check if it's under 5
+        //check if age under 5
         do {
-            try checkcAgeIsOverFice(with: age)
+            try checkcAgeIsOverFice(with: entrantInformation.dateOfBirth!)
         } catch let error as EntrantCheckError{
             print(error.rawValue)
             return nil
         }
-    
-        
         
         entrantType = EntrantType.guestFreeChild
         self.rideAccess = [.ride]

@@ -11,7 +11,7 @@ import Foundation
 //Error handling
 enum EntrantCheckError:String, Error {
     case invalidAge = "Age not given."
-    case ageTooHigh = "Age too high for Free Child Pass."
+    case ageTooHigh = "Age too high for free child pass."
     
     case invalidFirstName = "First name cannot be empty."
     case invalidLastName = "Last name cannot be empty."

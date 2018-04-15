@@ -8,16 +8,6 @@
 
 import Foundation
 
-/*
-struct AccessAreas {
-    var amusementAcces: Bool
-    var kitchenAcces: Bool
-    var rideControlAccess: Bool
-    var officeAccess: Bool
-    var maintenanceAccess: Bool
-}
-*/
-
 enum AccessAreas: String{
     case amusement = "Amusement Area"
     case kitchen = "Kitchen Area"
@@ -61,6 +51,7 @@ enum EntrantType: String {
 }
 
 
+//Protocols for all Entrants
 protocol EntrantProfile {
     var accessAreas : [AccessAreas] { get }
     var rideAccess: [RideAccess] { get }
@@ -68,6 +59,7 @@ protocol EntrantProfile {
     var discounts: [Discounts] { get }
 }
 
+//Protocols for Guests. Leave VIP and Child protocol empty for now..
 protocol GuestProfile: EntrantProfile {
     var entrantType: EntrantType { get }
 }
@@ -75,6 +67,8 @@ protocol VIPGuestProfile: GuestProfile {
 }
 protocol FreeChildGuestProfile: GuestProfile {
 }
+
+//Protocols for Employees. Leave VIP and Child protocol empty for now..
 protocol EmployeeProfile: EntrantProfile {
     var entrantType: EntrantType { get }
 }
@@ -96,31 +90,57 @@ class Entrant: EntrantProfile {
         self.entrantInformation = entrantInformation
     }
     
-    func swipeAreaAccess(area: AccessAreas) -> Bool{
+    ///
+    //SWIPE RETURNS NORMALLY BOOLEAN VALUE BUT FOR PART I IT PRINTS STRING
+    ///
+    func swipeAreaAccess(area: AccessAreas)-> Void{
+        
+        if checkIfBirthday() {
+            print("Happy BirthDay!!")
+        }
+        
         //check if area is in accessAreas
         for ownArea in accessAreas {
             if ownArea == area {
-                //print("Access Granted to \(area.rawValue)")
-                return true
+                print("Access granted")
+                //return true
+                return
             }
         }
-        //print("Access denied to \(area.rawValue)")
-        return false
+        print("Access denied")
+        //return false
+    }
+    
+    func returnDayAndMonth(from date: Date) -> (day: Int, month: Int) {
+        let ageComponents = Calendar.current.dateComponents([.day, .month], from: date)
+        return (ageComponents.day!, ageComponents.month!)
     }
     
     //Swipecheck for rideaccess.
-    func swipeCheck(accessFor: RideAccess) -> Bool{
+    func swipeCheck(accessFor: RideAccess) -> Void{
+        
+        if checkIfBirthday() {
+            print("Happy BirthDay!!")
+        }
+        
         for access in rideAccess {
             if access == accessFor {
-                //print("Access granted: \(access)")
-                return true
+                print("Access granted")
+                //return true
+                return
             }
         }
-        //print("Access denied: \(access)")
-        return false
+        print("Access denied")
+        //return false
     }
     
+    //Swipe for Discount values. Function prints them on console.
     func swipeDiscounts(){
+        
+        if checkIfBirthday() {
+            print("Happy BirthDay!!")
+        }
+        
         for discount in discounts{
             switch discount {
             case .food(let value):
@@ -134,6 +154,23 @@ class Entrant: EntrantProfile {
         if(discounts.isEmpty) {
             print("No discounts")
         }
+    }
+    
+    ///Check if the entrant has birthday
+    func checkIfBirthday() -> Bool{
+        
+        if let age = entrantInformation.dateOfBirth {
+            let timeNow = Date()
+            let dayAndMonthNow = returnDayAndMonth(from: timeNow)
+            let birthday = returnDayAndMonth(from: age)
+            
+            if dayAndMonthNow == birthday {
+                return true
+            } else {
+                return false
+            }
+        }
+        return false
     }
     
     

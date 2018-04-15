@@ -10,62 +10,51 @@ import Foundation
 
 
 ///
-/// GUEST - CLASSIC
+/// GUEST - CLASSIC - no birthday
 ///
-/*
-var dateComponents = DateComponents(calendar: Calendar.current, timeZone: nil, era: nil, year: 2010, month: 7, day: 22, hour: 12, minute: 00, second: 00, nanosecond: 00, weekday: nil, weekdayOrdinal: nil, quarter: nil, weekOfMonth: nil, weekOfYear: nil, yearForWeekOfYear: nil)
+//*
+var dateComponents = DateComponents(calendar: Calendar.current, year: 1988, month: 22, day: 7)
 let calendar = Calendar.current
 let testDate = calendar.date(from: dateComponents)
-let TESTIENTRANTNFORMATION = EntrantInformation(firstName: nil, lastName: nil, streetAddress: nil, city: nil, state: nil, zipCode: nil, dateOfBirth: nil)
+let TESTIENTRANTNFORMATION = EntrantInformation(firstName: nil, lastName: nil, streetAddress: nil, city: nil, state: nil, zipCode: nil, dateOfBirth: testDate)
 
 let TESTENTRANT = try! Guest(entrantInformation: TESTIENTRANTNFORMATION)
-*/
+//*/
 
 
 ///
-/// GUEST - VIP
+/// GUEST - VIP - Birthdays
 ///
 /*
-var dateComponents = DateComponents(calendar: Calendar.current, timeZone: nil, era: nil, year: 2010, month: 7, day: 22, hour: 12, minute: 00, second: 00, nanosecond: 00, weekday: nil, weekdayOrdinal: nil, quarter: nil, weekOfMonth: nil, weekOfYear: nil, yearForWeekOfYear: nil)
+var dateComponents = DateComponents(calendar: Calendar.current, year: 1988, month: 4, day: 15)
 let calendar = Calendar.current
 let testDate = calendar.date(from: dateComponents)
-let TESTIENTRANTNFORMATION = EntrantInformation(firstName: nil, lastName: nil, streetAddress: nil, city: nil, state: nil, zipCode: nil, dateOfBirth: nil)
+let TESTIENTRANTNFORMATION = EntrantInformation(firstName: nil, lastName: nil, streetAddress: nil, city: nil, state: nil, zipCode: nil, dateOfBirth: testDate)
 
 let TESTENTRANT = try! GuestVIP(entrantInformation: TESTIENTRANTNFORMATION)
 */
 
 
 ///
-/// GUEST - FREE CHILD - AGE GIVEN - AGE UNDER 5 YEARS
+/// GUEST - FREE CHILD - AGE UNDER 5 YEARS - BIRTHDAY
 ///
 /*
-var dateComponents = DateComponents(calendar: Calendar.current, timeZone: nil, era: nil, year: 2015, month: 7, day: 22, hour: 12, minute: 00, second: 00, nanosecond: 00, weekday: nil, weekdayOrdinal: nil, quarter: nil, weekOfMonth: nil, weekOfYear: nil, yearForWeekOfYear: nil)
+var dateComponents = DateComponents(calendar: Calendar.current, year: 2015, month: 4, day: 15)
 let calendar = Calendar.current
 let testDate = calendar.date(from: dateComponents)
-let TESTIENTRANTNFORMATION = EntrantInformation(firstName: nil, lastName: nil, streetAddress: nil, city: nil, state: nil, zipCode: nil, dateOfBirth: testDate!)
+let TESTIENTRANTNFORMATION = EntrantInformation(firstName: nil, lastName: nil, streetAddress: nil, city: nil, state: nil, zipCode: nil, dateOfBirth: testDate)
 let TESTENTRANT = try! GuestFreeChild(entrantInformation: TESTIENTRANTNFORMATION)
 */
 
 
 ///
-/// GUEST - FREE CHILD - AGE GIVEN - AGE OVER 5 YEARS
+/// GUEST - FREE CHILD - AGE OVER 5 YEARS
 ///
 /*
- var dateComponents = DateComponents(calendar: Calendar.current, timeZone: nil, era: nil, year: 2000, month: 7, day: 22, hour: 12, minute: 00, second: 00, nanosecond: 00, weekday: nil, weekdayOrdinal: nil, quarter: nil, weekOfMonth: nil, weekOfYear: nil, yearForWeekOfYear: nil)
- let calendar = Calendar.current
- let testDate = calendar.date(from: dateComponents)
- let TESTIENTRANTNFORMATION = EntrantInformation(firstName: nil, lastName: nil, streetAddress: nil, city: nil, state: nil, zipCode: nil, dateOfBirth: testDate!)
- let TESTENTRANT = try! GuestFreeChild(entrantInformation: TESTIENTRANTNFORMATION)
- */
-
-///
-/// GUEST - FREE CHILD - AGE GIVEN
-///
-/*
-var dateComponents = DateComponents(calendar: Calendar.current, timeZone: nil, era: nil, year: 2010, month: 7, day: 22, hour: 12, minute: 00, second: 00, nanosecond: 00, weekday: nil, weekdayOrdinal: nil, quarter: nil, weekOfMonth: nil, weekOfYear: nil, yearForWeekOfYear: nil)
+var dateComponents = DateComponents(calendar: Calendar.current, year: 2012, month: 2, day: 10)
 let calendar = Calendar.current
 let testDate = calendar.date(from: dateComponents)
-let TESTIENTRANTNFORMATION = EntrantInformation(firstName: nil, lastName: nil, streetAddress: nil, city: nil, state: nil, zipCode: nil, dateOfBirth: nil)
+let TESTIENTRANTNFORMATION = EntrantInformation(firstName: nil, lastName: nil, streetAddress: nil, city: nil, state: nil, zipCode: nil, dateOfBirth: testDate!)
 let TESTENTRANT = try! GuestFreeChild(entrantInformation: TESTIENTRANTNFORMATION)
 */
 
@@ -74,7 +63,7 @@ let TESTENTRANT = try! GuestFreeChild(entrantInformation: TESTIENTRANTNFORMATION
 // EMPLOYEE - Maintenance
 //
 /*
-var dateComponents = DateComponents(calendar: Calendar.current, timeZone: nil, era: nil, year: 2010, month: 7, day: 22, hour: 12, minute: 00, second: 00, nanosecond: 00, weekday: nil, weekdayOrdinal: nil, quarter: nil, weekOfMonth: nil, weekOfYear: nil, yearForWeekOfYear: nil)
+var dateComponents = DateComponents(calendar: Calendar.current, year: nil, month: nil, day: nil)
 let calendar = Calendar.current
 let testDate = calendar.date(from: dateComponents)
 let TESTIENTRANTNFORMATION = EntrantInformation(firstName: "Jaakko", lastName: "Kenttä", streetAddress: "Streetname", city: "Oulu", state: "Oulu", zipCode: "90540", dateOfBirth: nil)
@@ -86,10 +75,35 @@ let TESTENTRANT = try! EmployeeHourlyMaintenance(entrantInformation: TESTIENTRAN
 //
 // EMPLOYEE - Maintenance - First Name not given
 //
-//*
-var dateComponents = DateComponents(calendar: Calendar.current, timeZone: nil, era: nil, year: 2010, month: 7, day: 22, hour: 12, minute: 00, second: 00, nanosecond: 00, weekday: nil, weekdayOrdinal: nil, quarter: nil, weekOfMonth: nil, weekOfYear: nil, yearForWeekOfYear: nil)
+/*
+var dateComponents = DateComponents(calendar: Calendar.current, year: nil, month: nil, day: nil)
 let calendar = Calendar.current
 let testDate = calendar.date(from: dateComponents)
 let TESTIENTRANTNFORMATION = EntrantInformation(firstName: "", lastName: "Kenttä", streetAddress: "Streetname", city: "Oulu", state: "Oulu", zipCode: "90540", dateOfBirth: nil)
 let TESTENTRANT = try! EmployeeHourlyMaintenance(entrantInformation: TESTIENTRANTNFORMATION)
-//*/
+*/
+
+
+
+//
+// EMPLOYEE - Maintenance - State not given
+//
+/*
+var dateComponents = DateComponents(calendar: Calendar.current, year: nil, month: nil, day: nil)
+let calendar = Calendar.current
+let testDate = calendar.date(from: dateComponents)
+let TESTIENTRANTNFORMATION = EntrantInformation(firstName: "Jaakko", lastName: "Kenttä", streetAddress: "Streetname", city: "Oulu", state: "", zipCode: "90540", dateOfBirth: nil)
+let TESTENTRANT = try! EmployeeHourlyMaintenance(entrantInformation: TESTIENTRANTNFORMATION)
+*/
+
+
+//
+// MANAGER - Birthday
+//
+/*
+var dateComponents = DateComponents(calendar: Calendar.current, year: 2018, month: 04, day: 15)
+let calendar = Calendar.current
+let testDate = calendar.date(from: dateComponents)
+let TESTIENTRANTNFORMATION = EntrantInformation(firstName: "Jaakko", lastName: "Kenttä", streetAddress: "Streetname", city: "Oulu", state: "Oulu", zipCode: "90540", dateOfBirth: testDate)
+let TESTENTRANT = try! Manager(entrantInformation: TESTIENTRANTNFORMATION)
+*/
