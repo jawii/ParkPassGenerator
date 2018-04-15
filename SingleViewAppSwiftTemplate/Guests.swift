@@ -34,7 +34,8 @@ class GuestFreeChild: Guest, FreeChildGuestProfile{
     override init?(entrantInformation: EntrantInformation) throws{
         try super.init(entrantInformation: entrantInformation)
         entrantType = EntrantType.guestFreeChild
-        
+    
+        //Field on part 2 will always produce a date object
         /*
         guard let age = entrantInformation.dateOfBirth else {
             print(EntrantCheckError.invalidAge.rawValue)

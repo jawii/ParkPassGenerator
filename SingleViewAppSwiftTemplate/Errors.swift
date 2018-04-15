@@ -8,7 +8,7 @@
 
 import Foundation
 
-//Error handling
+//Error handling pass generation
 enum EntrantCheckError:String, Error {
     case invalidAge = "Age not given."
     case ageTooHigh = "Age too high for free child pass."

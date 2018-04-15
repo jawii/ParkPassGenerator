@@ -64,7 +64,7 @@ class EmployeeHourlyMaintenance: Employee, EmployeeHourlyProfile {
 }
 
 
-///Manager is like a Employee 
+///Manager is like an Employee 
 class Manager: Employee, ManagerProfile {
     var entrantType = EntrantType.manager
     

@@ -23,7 +23,7 @@ let TESTENTRANT = try! Guest(entrantInformation: TESTIENTRANTNFORMATION)
 
 
 ///
-/// GUEST - VIP - Birthdays
+/// GUEST - VIP - Birthdays [at least was on 4/15 :) ]
 ///
 /*
 var dateComponents = DateComponents(calendar: Calendar.current, year: 1988, month: 4, day: 15)
