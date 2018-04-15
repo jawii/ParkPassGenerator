@@ -12,20 +12,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        //age under 5
-        var dateComponents = DateComponents()
-        dateComponents.year = 2017
-        dateComponents.month = 07
-        dateComponents.day = 22
-        let calendar = Calendar.current
-        let date18yearOld = calendar.date(from: dateComponents)
-        
-        let testinfo = EntrantInformation(firstName: "Jaakko", lastName: "Hello", streetAddress: "Ok", city: "Oulu", state: "132", zipCode: "123", dateOfBirth: date18yearOld!)
-        
         //Try to wrap the entrant. If succees, print the information
-        if let entrant = try! EmployeeHourlyRideServices(entrantInformation: testinfo) {
+        if let entrant = TESTENTRANT {
             print("ENTRANT TYPE: \(entrant.entrantType.rawValue)")
             print("--------------------------------")
             testAccessAreas(entrant: entrant)
@@ -34,7 +22,6 @@ class ViewController: UIViewController {
             print("--------------------------------")
             entrant.swipeDiscounts()
         }
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -46,7 +33,6 @@ class ViewController: UIViewController {
         //Print Access for Amusement
         var listOfGranted: [AccessAreas] = []
         var listOfDenied: [AccessAreas] = []
-        
         
         //List of all areas. Magic added those by hand but this is only for the test case for Part1
         let areas : [AccessAreas] = [.amusement, .kitchen, .maintenance, .office, .rideControl]
@@ -82,10 +68,5 @@ class ViewController: UIViewController {
         }
         print(canPassLinesStr)
     }
-    
-    
-    
-
-
 }
 

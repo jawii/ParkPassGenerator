@@ -37,13 +37,13 @@ enum Discounts {
 }
 
 struct EntrantInformation {
-    let firstName: String
-    let lastName: String
-    let streetAddress: String
-    let city: String
-    let state: String
-    let zipCode: String
-    let dateOfBirth: Date
+    let firstName: String?
+    let lastName: String?
+    let streetAddress: String?
+    let city: String?
+    let state: String?
+    let zipCode: String?
+    let dateOfBirth: Date?
 }
 
 enum EntrantType: String {
