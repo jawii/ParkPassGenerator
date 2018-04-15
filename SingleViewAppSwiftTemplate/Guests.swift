@@ -21,12 +21,11 @@ class Guest:Entrant, GuestProfile{
 
 class GuestVIP: Guest, VIPGuestProfile{
     
-    var discounts = Discounts(food: 10, merchandice: 20)
-
     override init(entrantInformation: EntrantInformation) throws{
         try super.init(entrantInformation: entrantInformation)
         entrantType = EntrantType.guestVIP
         self.rideAccess = [.canPassLines, .ride]
+        self.discounts = [.food(10), .merchandice(20)]
     }
 }
 

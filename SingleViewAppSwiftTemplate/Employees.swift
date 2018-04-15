@@ -9,14 +9,13 @@
 import Foundation
 
 class Employee: Entrant {
-    
-    var discounts = Discounts(food: 15, merchandice: 25)
 
     override init(entrantInformation: EntrantInformation) throws {
     
         try super.init(entrantInformation: entrantInformation)
-        self.accessAreas = []
+        //self.accessAreas = []
         self.rideAccess = [.ride]
+        self.discounts = [.food(15), .merchandice(25)]
         
         if entrantInformation.firstName == "" {
             throw EntrantCheckError.invalidFirstName
@@ -26,6 +25,8 @@ class Employee: Entrant {
             throw EntrantCheckError.invalidState
         } else if entrantInformation.zipCode == "" {
             throw EntrantCheckError.invalidZipCode
+        } else if entrantInformation.city == "" {
+            throw EntrantCheckError.invalidCity
         }
     }
 }
@@ -66,7 +67,7 @@ class Manager: Employee, ManagerProfile {
     override init(entrantInformation: EntrantInformation) throws{
         try super.init(entrantInformation: entrantInformation)
         self.accessAreas = [.amusement, .kitchen, .office, .rideControl, .maintenance]
-        self.discounts = Discounts(food: 25, merchandice: 25)
+        self.discounts = [.food(25), .merchandice(25)]
     }
 }
 

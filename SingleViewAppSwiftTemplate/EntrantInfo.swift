@@ -18,24 +18,23 @@ struct AccessAreas {
 }
 */
 
-enum AccessAreas{
-    case amusement
-    case kitchen
-    case rideControl
-    case office
-    case maintenance
+enum AccessAreas: String{
+    case amusement = "Amusement Area"
+    case kitchen = "Kitchen Area"
+    case rideControl = "Ride Control Area"
+    case office = "Office Area"
+    case maintenance = "Maintenance Area"
 }
 
-enum RideAccess{
-    case ride
-    case canPassLines
+enum RideAccess: String{
+    case ride = "Entrant can ride"
+    case canPassLines = "Entrant can pass lines"
 }
 
-struct Discounts {
-    var food: Double
-    var merchandice: Double
+enum Discounts {
+    case food(Double)
+    case merchandice(Double)
 }
-
 
 struct EntrantInformation {
     let firstName: String
@@ -66,30 +65,23 @@ protocol EntrantProfile {
     var accessAreas : [AccessAreas] { get }
     var rideAccess: [RideAccess] { get }
     var entrantInformation: EntrantInformation { get }
+    var discounts: [Discounts] { get }
 }
 
 protocol GuestProfile: EntrantProfile {
     var entrantType: EntrantType { get }
 }
 protocol VIPGuestProfile: GuestProfile {
-    var discounts: Discounts { get }
 }
 protocol FreeChildGuestProfile: GuestProfile {
-    
 }
 protocol EmployeeProfile: EntrantProfile {
-    
+    var entrantType: EntrantType { get }
 }
 protocol EmployeeHourlyProfile: EmployeeProfile{
-    var entrantType: EntrantType { get }
-    var entrantInformation: EntrantInformation { get }
-    var discounts: Discounts { get }
+    
 }
-
 protocol ManagerProfile: EntrantProfile {
-    var entrantType: EntrantType { get }
-    var discounts: Discounts { get }
-    var entrantInformation: EntrantInformation { get }
 }
 
 
@@ -97,21 +89,46 @@ protocol ManagerProfile: EntrantProfile {
 class Entrant: EntrantProfile {
     var accessAreas: [AccessAreas] = []
     var rideAccess: [RideAccess] = []
+    var discounts: [Discounts] = []
     var entrantInformation: EntrantInformation
     
     init(entrantInformation: EntrantInformation) throws{
         self.entrantInformation = entrantInformation
     }
     
-    func swipeAreaAccess(){
+    func swipeAreaAccess(area: AccessAreas) -> Bool{
+        //check if area is in accessAreas
+        for ownArea in accessAreas {
+            if ownArea == area {
+                print("Access Granted to \(area.rawValue)")
+                return true
+            }
+        }
+        print("Access denied to \(area.rawValue)")
+        return false
     }
     
     func swipeDiscounts(){
-        
+        for discount in discounts {
+            switch discount {
+            case .food(let value):
+                print("Food discount \(value)%. ")
+                
+            case .merchandice(let value):
+                print("Merchandice discount \(value)%")
+            }
+        }
     }
     
-    func swipeRides(){
-        
+    func swipeCheck(accessFor: RideAccess) -> Bool{
+        for access in rideAccess {
+            if access == accessFor {
+                print("Access granted: \(access)")
+                return true
+            }
+        }
+        print("Access denied: \(rideAccess)")
+        return false
     }
 }
 

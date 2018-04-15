@@ -18,6 +18,7 @@ enum EntrantCheckError:String, Error {
     case invalidLastName = "Invalid lasta name"
     case invalidState = "Invalid state"
     case invalidZipCode = "Invalid zip code"
+    case invalidCity = "Invalid City name"
 }
 
 

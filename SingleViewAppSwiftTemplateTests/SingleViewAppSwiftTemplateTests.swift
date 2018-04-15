@@ -16,23 +16,6 @@ class SingleViewAppSwiftTemplateTests: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
 
 /*
-        //age under 5
-        var dateComponents = DateComponents()
-        dateComponents.year = 2000
-        dateComponents.month = 07
-        dateComponents.day = 22
-        let calendar = Calendar.current
-        let date18yearOld = calendar.date(from: dateComponents)
-        
-        let testinfo = EntrantInformation(firstName: "Jaakko", lastName: "Kenttä", streetAddress: "Ok", city: "Buc", state: "132", zipCode: "123", dateOfBirth: date18yearOld!)
-        
-        do {
-            let employee = try GuestFreeChild(entrantInformation: testinfo)
-            print(employee.entrantInformation.firstName)
-        }
-        catch {
-            print(error)
-        }
 */
     }
     
