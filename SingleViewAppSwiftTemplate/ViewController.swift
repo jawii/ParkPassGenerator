@@ -34,12 +34,12 @@ class ViewController: UIViewController {
             entrant.swipeDiscounts()
             
             //TEST THE 5 SECOND RULE FOR SWIPING
-            /*
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5), execute: {
-                print("\n \n \nNEW SWIPE AFTER 5 SECONDS")
+            let seconds = 4
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(seconds), execute: {
+                print("\n \n \nNEW SWIPE AFTER \(seconds) SECONDS")
                 entrant.swipeCheck(accessFor: .ride)
             })
-            */
+
         }
     }
     
