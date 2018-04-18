@@ -18,6 +18,7 @@ enum EntrantCheckError:String, Error {
     case invalidState = "State name cannot be empty."
     case invalidZipCode = "Zip code cannot be empty."
     case invalidCity = "City name cannot be empty."
+    case invalidSNN = "Social Security Number cannot be empty"
 }
 
 

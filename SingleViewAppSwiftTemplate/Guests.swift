@@ -36,12 +36,11 @@ class GuestFreeChild: Guest, FreeChildGuestProfile{
         entrantType = EntrantType.guestFreeChild
     
         //Field on part 2 will always produce a date object
-        /*
-        guard let age = entrantInformation.dateOfBirth else {
+        guard entrantInformation.dateOfBirth != nil else {
             print(EntrantCheckError.invalidAge.rawValue)
             return nil
         }
-        */
+ 
         
         //check if age under 5
         do {

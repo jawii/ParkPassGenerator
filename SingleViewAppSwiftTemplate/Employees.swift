@@ -8,11 +8,16 @@
 
 import Foundation
 
+/// Parent class for all employees. 
 class Employee: Entrant {
 
     override init?(entrantInformation: EntrantInformation) throws {
     
        try super.init(entrantInformation: entrantInformation)
+        
+        // Check that there is no empty strings for information
+        // No need to check the nil because textfield returns always atleast empty string.
+        // Date return nil if not provided. In Part 2, it will transform to Date object and it's nill if not provided
         do {
             if entrantInformation.firstName == "" {
                 throw EntrantCheckError.invalidFirstName
@@ -24,7 +29,12 @@ class Employee: Entrant {
                 throw EntrantCheckError.invalidZipCode
             } else if entrantInformation.city == "" {
                 throw EntrantCheckError.invalidCity
+            } else if entrantInformation.socialSecurityNumber == "" {
+                throw EntrantCheckError.invalidSNN
+            } else if entrantInformation.dateOfBirth == nil {
+                throw EntrantCheckError.invalidAge
             }
+            
         } catch let error as EntrantCheckError {
             print("Error for creating pass for Employee:")
             print(error.rawValue)
@@ -65,8 +75,26 @@ class EmployeeHourlyMaintenance: Employee, EmployeeHourlyProfile {
 
 
 ///Manager is like an Employee 
-class Manager: Employee, ManagerProfile {
-    var entrantType = EntrantType.manager
+class ManagerGeneral: Employee, ManagerProfile {
+    var entrantType = EntrantType.managerGeneral
+    
+    override init?(entrantInformation: EntrantInformation) throws{
+        try super.init(entrantInformation: entrantInformation)
+        self.accessAreas = [.amusement, .kitchen, .office, .rideControl, .maintenance]
+        self.discounts = [.food(25), .merchandice(25)]
+    }
+}
+class ManagerShift: Employee, ManagerProfile {
+    var entrantType = EntrantType.managerShift
+    
+    override init?(entrantInformation: EntrantInformation) throws{
+        try super.init(entrantInformation: entrantInformation)
+        self.accessAreas = [.amusement, .kitchen, .office, .rideControl, .maintenance]
+        self.discounts = [.food(25), .merchandice(25)]
+    }
+}
+class ManagerSenior: Employee, ManagerProfile {
+    var entrantType = EntrantType.managerSenior
     
     override init?(entrantInformation: EntrantInformation) throws{
         try super.init(entrantInformation: entrantInformation)

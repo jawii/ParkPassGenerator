@@ -36,6 +36,7 @@ struct EntrantInformation {
     let state: String?
     let zipCode: String?
     let dateOfBirth: Date?
+    let socialSecurityNumber: String?
 }
 
 enum EntrantType: String {
@@ -49,7 +50,9 @@ enum EntrantType: String {
     case employeeRideService = "Employeee Ride Services"
     case employeeMaintenance = "Employee Maintenance"
     //other
-    case manager = "Manager"
+    case managerShift = "Shift Manager"
+    case managerGeneral = "General Manager"
+    case managerSenior = "Senior Manager"
 }
 
 

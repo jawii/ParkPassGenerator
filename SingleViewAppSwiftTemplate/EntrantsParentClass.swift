@@ -20,7 +20,7 @@ class Entrant: EntrantProfile {
     init?(entrantInformation: EntrantInformation) throws{
         self.entrantInformation = entrantInformation
         
-        //creat dummy value for date, in real app it could be i.e. just Date()
+        //creat dummy value for date
         let dateComponents = DateComponents(year: 2018, month: 1, day: 1)
         let calendar = Calendar.current
         self.lastTimeswiped = calendar.date(from: dateComponents)!
@@ -41,6 +41,12 @@ class Entrant: EntrantProfile {
         }
     }
     
+    /// Helper method: Used for birthdaychecking.
+    func returnDayAndMonth(from date: Date) -> (day: Int, month: Int) {
+        let ageComponents = Calendar.current.dateComponents([.day, .month], from: date)
+        return (ageComponents.day!, ageComponents.month!)
+    }
+    
     ///Check if entrant has access to given area. Returns console prints but in Part II, return boolen value
     func swipeAreaAccess(area: AccessAreas)-> Void{
         
@@ -57,12 +63,7 @@ class Entrant: EntrantProfile {
         //return false
     }
     
-    func returnDayAndMonth(from date: Date) -> (day: Int, month: Int) {
-        let ageComponents = Calendar.current.dateComponents([.day, .month], from: date)
-        return (ageComponents.day!, ageComponents.month!)
-    }
-    
-    //Swipecheck for rideaccess.
+    /// Swipecheck for rideaccess.
     func swipeCheck(accessFor: RideAccess) -> Void{
         
         //check if 5 seconds is passed since last swipe
@@ -76,7 +77,6 @@ class Entrant: EntrantProfile {
         lastTimeswiped = timeNow
         
         checkIfBirthday()
-        lastTimeswiped = Date()
         
         for access in rideAccess {
             if access == accessFor {
